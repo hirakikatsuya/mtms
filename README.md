@@ -42,5 +42,4 @@ https://app.diagrams.net/#G19i1wNKOOjBHzGAQziNslS4K8XDMxztpD
 - IDE：Cloud9
 
 ## 使用素材
-- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
-- 使用しない場合は、使用素材の項目をREADMEから削除してください。
+- 使用素材検討中

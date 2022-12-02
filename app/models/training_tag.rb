@@ -1,0 +1,2 @@
+class TrainingTag < ApplicationRecord
+end

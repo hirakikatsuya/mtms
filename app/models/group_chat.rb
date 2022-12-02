@@ -1,0 +1,2 @@
+class GroupChat < ApplicationRecord
+end

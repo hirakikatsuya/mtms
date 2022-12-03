@@ -1,11 +1,11 @@
 class Group < ApplicationRecord
-  
-  has_many :group_users
-  has_many :users, through: :group_users
-  
+
+  has_many :group_users, dependent: :destroy
+  has_many :users, through: :group_users, dependent: :destroy
+
   validates :group_name,{presence:true,length:{maximum:10}}
   validates :group_explain,{presence:true,length:{maximum:100}}
-  
+
   has_one_attached :group_image
 
   def get_group_image
@@ -15,5 +15,5 @@ class Group < ApplicationRecord
     end
     group_image.variant(resize_to_limit:[100, 100]).processed
   end
-  
+
 end

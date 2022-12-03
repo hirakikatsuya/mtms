@@ -14,13 +14,17 @@ class User < ApplicationRecord
 
   has_many:user_rooms
   has_many:rooms,through: :user_rooms
-  has_many:message
+  has_many:messages
 
   has_many :relationships, class_name:"Relationship", foreign_key:"follower_id", dependent: :destroy
+  # relationshipsでRelationテーブルを参照し、follower_idを基準にする
   has_many :followings, through: :relationships, source: :followed
+  # followingsでfollower_idにフォローされた人を表示する（フォロー）
 
   has_many :reverse_relationships, class_name:"Relationship", foreign_key:"followed_id", dependent: :destroy
+  # reverse_relationshipsでRelationテーブルを参照し、followed_idを基準にする
   has_many :followers, through: :reverse_relationships, source: :follower
+  # followersでfollowed_idがフォローされた人を表示する（フォロワー）
 
   has_one_attached :profile_image
 
@@ -35,17 +39,19 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit:[100, 100]).processed
   end
 
+    # フォローするメソッド
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
 
+    # フォローを外すメソッド
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end
 
+  # フォローしているか確認するメソッド（user_idがfollowingsのrelationshipsテーブルにあるかどうか）
   def following?(user)
     followings.include?(user)
   end
-
 
 end

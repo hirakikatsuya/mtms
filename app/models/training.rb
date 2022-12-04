@@ -10,6 +10,10 @@ class Training < ApplicationRecord
 
   has_one_attached :training_image
 
+  def favorited_by?(user)
+    favorites.exists?(user_id:user.id)
+  end
+
   def get_training_image
     unless training_image.attached?
       file_path=Rails.root.join("app/assets/images/no_image.jpg")

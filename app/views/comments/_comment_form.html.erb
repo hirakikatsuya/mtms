@@ -1,6 +1,6 @@
 <%= form_with model:[training,comment],local:false do |f| %>
   <div class="form-group">
-    <%= f.text_area:comment ,class:"form-control form-control-lg border-dark" %>
+    <%= f.text_area:comment ,class:"form-control border-dark" %>
   </div>
-    <%= f.submit "送信" %>
+    <%= f.submit "送信",class:"btn btn-success" %>
 <% end %>

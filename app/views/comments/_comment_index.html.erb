@@ -1,16 +1,28 @@
-<% training.comments.each do |comment| %>
-  <table>
-    <tr>
-      <td>
-        <%= link_to user_path(comment.user.id) do %>
-          <%= image_tag comment.user.get_profile_image %><br>
-          <%= comment.user.name %>
+<% if training.comments.exists? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ユーザー</th>
+          <th>コメント</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% training.comments.each do |comment| %>
+          <tr>
+            <td>
+              <%= link_to user_path(comment.user.id) do %>
+                <%= image_tag comment.user.get_profile_image,size:"50x50" %>
+                <%= comment.user.name %>
+              <% end %>
+            </td>
+            <td><%= comment.comment %></td>
+            <% if comment.user==current_user %>
+              <td><%= link_to "Destroy",training_comment_path(comment.training,comment),method: :delete,class:"btn btn-sm btn-danger",remote:true %></td>
+            <% end %>
+          </tr>
         <% end %>
-      </td>
-      <td><%= comment.comment %></td>
-      <% if comment.user==current_user %>
-        <td><%= link_to "Destroy",training_comment_path(comment.training,comment),method: :delete,class:"btn btn-sm btn-danger",remote:true %></td>
-      <% end %>
-    </tr>
-  </table>
+      </tbody>
+    </table>
+<% else %>
 <% end %>

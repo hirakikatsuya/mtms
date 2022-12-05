@@ -1,5 +1,7 @@
 class TrainingsController < ApplicationController
+  before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update]
+
   def new
     @training=Training.new
   end
@@ -9,9 +11,9 @@ class TrainingsController < ApplicationController
     @training.user_id=current_user.id
     if  @training.save
       flash[:notice]="トレーニングを保存しました！"
-      redirect_to users_path
+      redirect_to user_path(current_user)
     else
-      render :new_path
+      render :new
     end
   end
 
@@ -21,6 +23,7 @@ class TrainingsController < ApplicationController
 
   def show
     @training=Training.find(params[:id])
+    @user=@training.user
     @comment=Comment.new
   end
 
@@ -32,7 +35,7 @@ class TrainingsController < ApplicationController
     @training=Training.find(params[:id])
     if @training.update(training_params)
       flash[:notice]="トレーニングを編集しました！"
-      redirect_to users_path
+      redirect_to user_path(current_user)
     else
       render :edit_training_path
     end

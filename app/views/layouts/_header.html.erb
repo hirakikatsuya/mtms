@@ -1,7 +1,11 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
     <div class="container">
-      <a class="navbar-brand" href="/">MTMS</a>
+      <% if user_signed_in? %>
+        <%= link_to "MTMS",user_path(current_user),class:"navbar-brand" %>
+      <% else %>
+        <%= link_to "MTMS",root_path,class:"navbar-brand" %>
+      <% end %>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -14,6 +18,12 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "ユーザー一覧", users_path,class:"nav-link text-light" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "投稿一覧",trainings_path,class:"nav-link text-light" %>
+            </li>
             <li class="nav-item">
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class:"nav-link text-light" %>
             </li>

@@ -19,7 +19,7 @@
           <% @trainings.each do |training| %>
             <tr>
               <td><%= image_tag training.user.get_profile_image,size:"50x50" %></td>
-              <td><%= training.title %></td>
+              <td><%= link_to training.title,training_path(training) %></td>
               <td><%= training.comments.count %></td>
               <td id="favorite-btn<%= training.id %>">
                 <%= render 'favorites/favorite',training:training %>

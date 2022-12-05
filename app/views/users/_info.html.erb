@@ -2,18 +2,21 @@
 <%= image_tag user.get_profile_image%>
 <table class="table">
   <tr>
-    <th>ユーザーネーム</th>
+    <th>ユーザー名</th>
     <th><%= user.name %></th>
   </tr>
   <tr>
-    <th><%= user.introduction %></th>
+    <th>自己紹介</th>
+    <td><%= user.introduction %></td>
   </tr>
-  <tr>
     <th>フォロー</th>
     <th><%= link_to user.followings.count,user_followings_path(user) %></th>
   </tr>
   <tr>
     <th>フォロワー</th>
     <th><%= link_to user.followers.count,user_followers_path(user) %></th>
+  </tr>
+  <tr>
+    <td><%= link_to "new",new_training_path %></td>
   </tr>
 </table>

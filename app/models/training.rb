@@ -2,13 +2,14 @@ class Training < ApplicationRecord
 
   belongs_to:user
 
-  has_many:favorites
-  has_many:comments
+  has_many:favorites,dependent: :destroy
+  has_many:comments,dependent: :destroy
   has_many:training_tags
   has_many:tags,through: :training_tags
 
   validates:title, {presence:true,length:{maximum:50}}
   validates:body,presence:true
+  validates:training_day,presence:true
 
   has_one_attached :training_image
 
@@ -23,6 +24,5 @@ class Training < ApplicationRecord
     end
     training_image.variant(resize_to_limit:[100, 100]).processed
   end
-
 
 end

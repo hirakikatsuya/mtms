@@ -2,6 +2,8 @@ class Training < ApplicationRecord
 
   belongs_to:user
 
+  has_many:favorites
+  has_many:comments
   has_many:training_tags
   has_many:tags,through: :training_tags
 

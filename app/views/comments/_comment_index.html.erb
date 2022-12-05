@@ -1,0 +1,16 @@
+<% training.comments.each do |comment| %>
+  <table>
+    <tr>
+      <td>
+        <%= link_to user_path(comment.user.id) do %>
+          <%= image_tag comment.user.get_profile_image %><br>
+          <%= comment.user.name %>
+        <% end %>
+      </td>
+      <td><%= comment.comment %></td>
+      <% if comment.user==current_user %>
+        <td><%= link_to "Destroy",training_comment_path(comment.training,comment),method: :delete,class:"btn btn-sm btn-danger",remote:true %></td>
+      <% end %>
+    </tr>
+  </table>
+<% end %>

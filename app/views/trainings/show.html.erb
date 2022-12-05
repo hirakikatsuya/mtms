@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h4><%= @training.user.name %>さんの<%= @training.training_day %>のトレーニング</h4>
+      <table class="table table-borderless">
+        <tr>
+          <th>トレーニング画像</th>
+          <td><%= image_tag @training.get_training_image,size:"200x200" %></td>
+        </tr>
+        <tr>
+          <th>タイトル</th>
+          <td><%= @training.title %></td>
+        </tr>
+        <tr>
+          <th>トレーニング内容</th>
+          <td><%= @training.body %></td>
+        </tr>
+        <tr>
+          <th>いいね</th>
+          <td id="favorite-btn<%= @training.id %>">
+              <%= render 'favorites/favorite',training:@training %>
+          </td>
+        </tr>
+        <tr>
+          <th>コメント数</th>
+          <td><%= @training.comments.count %></td>
+        </tr>
+        <tr>
+          <% if @training.user==current_user %>
+            <td><%= link_to "編集する",edit_training_path(@training.id),class:"btn btn-sm btn-success" %></td>
+            <td><%= link_to "削除する",training_path(@training.id),method: :delete,"data-confirm"=>"本当に消しますか？",class:"btn btn-sm btn-danger" %></td>
+          <% end %>
+        </tr>
+      </table>
+      <div id="comment_index">
+        <%= render "comments/comment_index",training:@training %>
+      </div>
+      <div id="comment_form">
+        <%= render "comments/comment_form",training:@training,comment:@comment %>
+      </div>
+    </div>
+  </div>
+</div>

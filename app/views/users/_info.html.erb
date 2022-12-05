@@ -1,0 +1,19 @@
+<h2>ユーザー情報</h2>
+<%= image_tag user.get_profile_image%>
+<table class="table">
+  <tr>
+    <th>ユーザーネーム</th>
+    <th><%= user.name %></th>
+  </tr>
+  <tr>
+    <th><%= user.introduction %></th>
+  </tr>
+  <tr>
+    <th>フォロー</th>
+    <th><%= link_to user.followings.count,user_followings_path(user) %></th>
+  </tr>
+  <tr>
+    <th>フォロワー</th>
+    <th><%= link_to user.followers.count,user_followers_path(user) %></th>
+  </tr>
+</table>

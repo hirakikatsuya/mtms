@@ -1,0 +1,3 @@
+$('#comment_index').html('<%= j(render "comments/comment_index",training:@training) %>');
+$("textarea").val('');
+$('#comment_count').html('<%= j(render 'comments/comment_count',training:@training) %>')

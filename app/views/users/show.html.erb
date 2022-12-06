@@ -5,7 +5,14 @@
       <%= render 'users/setting',user:@user %>
     </div>
     <div class="col-md-8 offset-md-1">
-      <h4>投稿一覧</h4>
+      <h4>
+        <%= @user.name %>さんの投稿一覧
+        <% if current_user.admin? && @user!=current_user && @user.is_deleted==false %>
+          <%= link_to "利用停止する",suspension_user_path,method: :patch,"data-confirm"=>"本当に利用停止しますか？",class:"btn btn-danger" %>
+        <% elsif @user.is_deleted==true %>
+          <%= link_to "利用停止を解除する",users_path,method: :patch,"data-confirm"=>"本当に利用停止を解除しますか？",class:"btn btn-success" %>
+        <% end %>
+      </h4>
       <table class="table">
         <thead>
           <tr>

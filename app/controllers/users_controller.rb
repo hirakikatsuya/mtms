@@ -37,6 +37,13 @@ class UsersController < ApplicationController
     @favorite_trainings=Training.find(favorites)
   end
 
+  def suspension
+    @user=User.find(params[:id])
+    @user.update(is_deleted:true)
+    flash[:notice]="利用停止にしました。"
+    redirect_to users_path
+  end
+
 
   private
 

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
+  before_action :search
 
   def index
     @users=User.all
@@ -23,6 +24,11 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def search
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
   end
 
   def favorites

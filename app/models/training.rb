@@ -25,4 +25,16 @@ class Training < ApplicationRecord
     training_image.variant(resize_to_limit:[100, 100]).processed
   end
 
+  def self.search_for(content, method)
+    if method=="perfect"
+      Training.where(title:content)
+    elsif method=="forward"
+      Training.where("title LIKE?", content+"%")
+    elsif method=="backward"
+      Training.where("title LIKE?", "%"+content)
+    else
+      Training.where("title LIKE?", "%"+content+"%")
+    end
+  end
+
 end

@@ -1,48 +1,44 @@
-<div class="container px-5">
-  <div class="row">
-    <div class="col-md-3">
-      <%= render 'users/info',user:@user %>
-      <%= render 'users/setting',user:@user %>
-    </div>
-    <div class="col-md-8 offset-md-1">
-      <h4>
-        <%= @training.user.name %>さんの<%= @training.training_day %>のトレーニング
-          <% if @training.user==current_user %>
-            <%= link_to "編集する",edit_training_path(@training.id),class:"btn btn-sm btn-success" %>
-            <%= link_to "削除する",training_path(@training.id),method: :delete,"data-confirm"=>"本当に消しますか？",class:"btn btn-sm btn-danger" %>
-          <% end %>
-      </h4>
-      <table class="table table-borderless">
-        <tr>
-          <th>トレーニング画像</th>
-          <td><%= image_tag @training.get_training_image,size:"200x200" %></td>
-        </tr>
-        <tr>
-          <th>タイトル</th>
-          <td><%= @training.title %></td>
-        </tr>
-        <tr>
-          <th>トレーニング内容</th>
-          <td><%= @training.body %></td>
-        </tr>
-        <tr>
-          <th>いいね</th>
-          <td id="favorite-btn<%= @training.id %>">
-              <%= render 'favorites/favorite',training:@training %>
-          </td>
-        </tr>
-        <tr>
-          <th>コメント数</th>
-          <td><span id="comment_count"><%= render 'comments/comment_count',training:@training %></span></td>
-        </tr>
-      </table>
-      <h4>コメント</h4>
-      <div id="comment_index">
-        <%= render "comments/comment_index",training:@training %>
-      </div>
-      <div id="comment_form">
-        <%= render "comments/comment_form",training:@training,comment:@comment %>
-      </div>
-    </div>
+<div class="col-md-3">
+  <%= render 'users/info',user:@user %>
+  <%= render 'users/setting',user:@user %>
+</div>
+<div class="col-md-8 offset-md-1">
+  <h4>
+    <%= @training.user.name %>さんの<%= @training.training_day %>のトレーニング
+      <% if @training.user==current_user %>
+        <%= link_to "編集する",edit_training_path(@training.id),class:"btn btn-sm btn-success" %>
+        <%= link_to "削除する",training_path(@training.id),method: :delete,"data-confirm"=>"本当に消しますか？",class:"btn btn-sm btn-danger" %>
+      <% end %>
+  </h4>
+  <table class="table table-borderless">
+    <tr>
+      <th>トレーニング画像</th>
+      <td><%= image_tag @training.get_training_image,size:"200x200" %></td>
+    </tr>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @training.title %></td>
+    </tr>
+    <tr>
+      <th>トレーニング内容</th>
+      <td><%= @training.body %></td>
+    </tr>
+    <tr>
+      <th>いいね</th>
+      <td id="favorite-btn<%= @training.id %>">
+          <%= render 'favorites/favorite',training:@training %>
+      </td>
+    </tr>
+    <tr>
+      <th>コメント数</th>
+      <td><span id="comment_count"><%= render 'comments/comment_count',training:@training %></span></td>
+    </tr>
+  </table>
+  <h4>コメント</h4>
+  <div id="comment_index">
+    <%= render "comments/comment_index",training:@training %>
+  </div>
+  <div id="comment_form">
+    <%= render "comments/comment_form",training:@training,comment:@comment %>
   </div>
 </div>

@@ -9,9 +9,8 @@ Rails.application.routes.draw do
     resource :relationships, only:[:create, :destroy]
     member do
       get "favorites"=>"users#favorites"
-    end
-    member do
-      patch "suspension"=>"users#suspension"
+      patch "suspend"=>"users#suspend"
+      patch "unsuspend"=>"users#unsuspend"
     end
     get "followings"=>"relationships#followings", as:"followings"
     get "followers"=>"relationships#followers", as:"followers"

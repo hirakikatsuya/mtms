@@ -1,38 +1,34 @@
-<div class="container px-5">
-  <div class="row">
-    <div class="col-md-3">
-      <%= render 'users/info',user:@user %>
-      <%= render 'users/setting',user:@user %>
-    </div>
-    <div class="col-md-8 offset-md-1">
-      <h4>
-        <%= @user.name %>さんの投稿一覧
-        <% if current_user.admin? && @user!=current_user && @user.is_deleted==false %>
-          <%= link_to "利用停止する",suspension_user_path,method: :patch,"data-confirm"=>"本当に利用停止しますか？",class:"btn btn-danger" %>
-        <% elsif @user.is_deleted==true %>
-          <%= link_to "利用停止を解除する",users_path,method: :patch,"data-confirm"=>"本当に利用停止を解除しますか？",class:"btn btn-success" %>
-        <% end %>
-      </h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>タイトル</th>
-            <th>コメント数</th>
-            <th>いいね数</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @user.trainings.each do |training| %>
-            <tr>
-              <td><%= link_to training.title,training_path(training) %></td>
-              <td><%= training.comments.count %></td>
-              <td id="favorite-btn<%= training.id %>">
-                <%= render 'favorites/favorite',training:training %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div class="col-md-3">
+  <%= render 'users/info',user:@user %>
+  <%= render 'users/setting',user:@user %>
+</div>
+<div class="col-md-8 offset-md-1">
+  <h4>
+    <%= @user.name %>さんの投稿一覧
+    <% if current_user.admin? && @user!=current_user && @user.is_deleted==false %>
+      <%= link_to "利用停止する",suspend_user_path,method: :patch,"data-confirm"=>"本当に利用停止しますか？",class:"btn btn-danger" %>
+    <% elsif current_user.admin? && @user!=current_user && @user.is_deleted==true %>
+      <%= link_to "利用停止を解除する",unsuspend_user_path,method: :patch,"data-confirm"=>"本当に利用停止を解除しますか？",class:"btn btn-success" %>
+    <% end %>
+  </h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>タイトル</th>
+        <th>コメント数</th>
+        <th>いいね数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @user.trainings.each do |training| %>
+        <tr>
+          <td><%= link_to training.title,training_path(training) %></td>
+          <td><%= training.comments.count %></td>
+          <td id="favorite-btn<%= training.id %>">
+            <%= render 'favorites/favorite',training:training %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>

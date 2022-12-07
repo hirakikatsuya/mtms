@@ -1,9 +1,5 @@
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-8 mx-auto">
-      <h4 class="mb-3">トレーニング新規投稿</h4>
-      <%= render 'layouts/error',error:@training %>
-      <%= render "trainings/training_form",training:@training %>
-    </div>
-  </div>
+<div class="mx-auto col-sm-12 col-md-11 col-lg-8 px-5 px-sm-0">
+  <h4 class="mb-3">トレーニング新規投稿</h4>
+  <%= render 'layouts/error',error:@training %>
+  <%= render "trainings/training_form",training:@training %>
 </div>

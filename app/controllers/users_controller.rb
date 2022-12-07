@@ -2,22 +2,21 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
-  before_action :search
+  before_action :admin_user,only: [:suspend,:unsuspend]
+  before_action :user_deleted?,only: [:show]
+  before_action :user_find,only: [:show,:edit,:update,:favorites,:suspend,:unsuspend]
 
   def index
-    @users=User.all
+    @users=User.where(is_deleted:false)
   end
 
   def show
-    @user=User.find(params[:id])
   end
 
   def edit
-    @user=User.find(params[:id])
   end
 
   def update
-    @user=User.find(params[:id])
     if @user.update(user_params)
       flash[:notice]="ユーザー情報を更新しました！"
       redirect_to user_path(current_user)
@@ -26,24 +25,22 @@ class UsersController < ApplicationController
     end
   end
 
-  def search
-    @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
-  end
-
   def favorites
-    @user=User.find(params[:id])
     favorites=Favorite.where(user_id:@user.id).pluck(:training_id)
     @favorite_trainings=Training.find(favorites)
   end
 
-  def suspension
-    @user=User.find(params[:id])
+  def suspend
     @user.update(is_deleted:true)
     flash[:notice]="利用停止にしました。"
     redirect_to users_path
   end
 
+  def unsuspend
+    @user.update(is_deleted:false)
+    flash[:notice] ="利用停止を解除しました。"
+    redirect_to users_path
+  end
 
   private
 
@@ -55,14 +52,33 @@ class UsersController < ApplicationController
     user=User.find(params[:id])
     unless user == current_user
       redirect_to user_path(current_user)
+      flash[:notice]="このページへは遷移できません"
+    end
+  end
+
+  def admin_user
+    unless current_user.admin?
+    redirect_to (users_path)
+    end
+  end
+
+  def user_deleted?
+    user=User.find(params[:id])
+    if current_user.admin==false && user.is_deleted==true
+      flash[:notice]="このユーザーは利用停止されています"
+      redirect_to users_path
     end
   end
 
   def ensure_guest_user
-    @user = User.find(params[:id])
-    if @user.name == "guestuser"
+    user = User.find(params[:id])
+    if user.name == "guestuser"
       redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
+  end
+
+  def user_find
+    @user=User.find(params[:id])
   end
 
 end

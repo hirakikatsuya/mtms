@@ -1,15 +1,11 @@
-<div class="container">
-  <div class="row">
-    <div class="col-10 mx-auto">
-      <h1><img src="/assets/45748.png" class="img-fluid max-width: 10% height: auto" alt="">MTMS</h1>
-      <p>このサイトは、日々のトレーニング内容を記録することが出来るSNSです！</p>
-      <p>記録する他に、他のユーザーのトレーニング内容を確認でき、コミュニケーションを取ることも出来ます！</p>
-      <p>皆で楽しくトレーニングを続けよう！</p>
-    </div>
-    <div class="col-6 mx-auto">
-      <%= link_to "新規登録",new_user_registration_path,class:"btn btn-block btn-danger" %>
-      <%= link_to "ログイン",new_user_session_path,class:"btn btn-block btn-danger" %>
-      <%= link_to "ゲストログイン（閲覧用)",users_guest_sign_in_path,class:"btn btn-secondary btn-sm btn-block mb-3 sign_in",method: :post %>
-    </div>
-  </div>
+<div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+  <h1><img src="/assets/45748.png" class="img-fluid max-width: 10% height: auto" alt="">MTMS</h1>
+  <p>このサイトは、日々のトレーニング内容を記録することが出来るSNSです！</p>
+  <p>記録する他に、他のユーザーのトレーニング内容を確認でき、コミュニケーションを取ることも出来ます！</p>
+  <p>皆で楽しくトレーニングを続けよう！</p>
+</div>
+<div class="btn-wrapper col-7 mx-auto">
+  <%= link_to "新規登録",new_user_registration_path,class:"btn btn-block btn-danger" %>
+  <%= link_to "ログイン",new_user_session_path,class:"btn btn-block btn-danger" %>
+  <%= link_to "ゲストログイン（閲覧用)",users_guest_sign_in_path,class:"btn btn-secondary btn-sm btn-block mb-3 sign_in",method: :post %>
 </div>

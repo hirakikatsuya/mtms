@@ -1,5 +1,4 @@
 class TrainingsController < ApplicationController
-  before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit,:update,:destroy]
   before_action :training_find,only:[:show,:edit,:update,:destroy]
 
@@ -19,7 +18,7 @@ class TrainingsController < ApplicationController
   end
 
   def index
-    @trainings=Training.all
+    @trainings=Training.active_users
   end
 
   def show
@@ -53,7 +52,8 @@ class TrainingsController < ApplicationController
 
   def is_matching_login_user
     training=Training.find(params[:id])
-    unless training.user == current_user
+    unless training.user == current_user || current_user.admin==true
+      flash[:notice]="このページへは遷移出来ません"
       redirect_to trainings_path
     end
   end

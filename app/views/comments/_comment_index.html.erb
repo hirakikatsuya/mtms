@@ -17,8 +17,8 @@
               <% end %>
             </td>
             <td><%= comment.comment %></td>
-            <% if comment.user==current_user %>
-              <td><%= link_to "Destroy",training_comment_path(comment.training,comment),method: :delete,class:"btn btn-sm btn-danger",remote:true %></td>
+            <% if comment.user==current_user || current_user.admin==true %>
+              <td><%= link_to "削除",training_comment_path(comment.training,comment),method: :delete,class:"btn btn-sm btn-danger",remote:true %></td>
             <% end %>
           </tr>
         <% end %>

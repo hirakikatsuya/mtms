@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
   def reject_user
     @user=User.find_by(email: params[:user][:email])
     if @user
-      if @user.valid_password?(params[:user][:password]) && (@user.active_for_authentication? == false)
+      if @user.valid_password?(params[:user][:password]) && (@user.is_deleted==true)
         flash[:notice] = "利用を停止しています"
         redirect_to new_user_registration_path
       else

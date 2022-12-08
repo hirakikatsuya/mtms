@@ -1,5 +1,5 @@
 <% if error.errors.any? %>
-  <h3><%= error.errors.count %> error prohibited this obj from being saved:</h3>
+  <h4><%= error.errors.count %> 件のエラーが発生したため、保存できませんでした。</h4>
   <ul>
     <% error.errors.full_messages.each do |message| %>
       <li><%= message %></li>

@@ -1,29 +1,30 @@
-<div class="mx-auto col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
-  <h1>Follow Users</h1>
+<div class="mx-auto col-sm-12 col-md-11 col-lg-8 px-5 px-sm-0">
+  <h1>フォロワー</h1>
   <% if @users.exists? %>
-   <table class="table">
-     <thead>
-       <tr>
-         <th>image</th>
-         <th>name</th>
-         <th></th>
-         <th></th>
-         <th></th>
-       </tr>
-     </thead>
-     <tbody>
-       <% @users.each do |user| %>
-         <tr>
-           <td><%= image_tag user.get_profile_image,size:'50x50' %> </td>
-           <td><%= user.name %></td>
-           <td>フォロー数: <%= user.followings.count %></td>
-           <td>フォロワー数: <%= user.followers.count %></td>
-           <td><%= link_to "Show",user_path(user.id) %> </td>
-         </tr>
-       <% end %>
-     </tbody>
-   </table>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ユーザー</th>
+          <th>フォロー数</th>
+          <th>フォロワー数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to user_path(user.id) do %>
+                <%=image_tag user.get_profile_image,size:'50x50' %>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td><%= user.followings.where(is_deleted:false).count %></td>
+            <td><%= user.followers.where(is_deleted:false).count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% else %>
-   <p>ユーザーはいません</p>
+    <p>ユーザーはいません</p>
   <% end %>
 </div>

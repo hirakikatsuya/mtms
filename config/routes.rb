@@ -1,16 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+  }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to:"homes#top"
   get "home/about"=>"homes#about", as:"about"
   get "/search" => "searches#search"
 
-  resources :users, only:[:index, :show, :edit, :update] do
+  resources :users, only:[:index, :show, :edit, :update, :destroy] do
     resource :relationships, only:[:create, :destroy]
     member do
       get "favorites"=>"users#favorites"
       patch "suspend"=>"users#suspend"
       patch "unsuspend"=>"users#unsuspend"
+    end
+    collection do
+      get "suspend_users"=>"users#suspend_users"
     end
     get "followings"=>"relationships#followings", as:"followings"
     get "followers"=>"relationships#followers", as:"followers"

@@ -1,0 +1,25 @@
+<div class="col-md-10">
+  <h2>利用停止ユーザー一覧</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ユーザー画像</th>
+        <th>ユーザー名</th>
+        <th>メールアドレス</th>
+        <th>利用停止日</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_profile_image,size:"50x50" %></td>
+          <td><%= link_to user.name,user_path(user.id) %></td>
+          <td><%= user.email %></td>
+          <td><%= l user.updated_at,format: :long %></td>
+          <td><%= link_to "完全に削除する",user_path(user),method: :delete,"data-confirm"=>"本当に削除しますか？",class:"btn btn-sm btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

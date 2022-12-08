@@ -10,11 +10,11 @@
     <td><%= user.introduction %></td>
   </tr>
     <th>フォロー</th>
-    <th><%= link_to user.followings.count,user_followings_path(user) %></th>
+    <th><%= link_to user.followings.where(is_deleted:false).count,user_followings_path(user) %></th>
   </tr>
   <tr>
     <th>フォロワー</th>
-    <th><%= link_to user.followers.count,user_followers_path(user) %></th>
+    <th><%= link_to user.followers.where(is_deleted:false).count,user_followers_path(user) %></th>
   </tr>
   <tr>
     <td><%= link_to "new",new_training_path %></td>

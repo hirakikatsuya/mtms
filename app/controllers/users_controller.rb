@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
   before_action :is_matching_login_user, only:[:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
-  before_action :admin_user,only: [:suspend,:unsuspend]
-  before_action :user_deleted?,only: [:show]
-  before_action :user_find,only: [:show,:edit,:update,:favorites,:suspend,:unsuspend]
+  before_action :admin_user,only: [:suspend,:unsuspend,:suspend_users,:destroy]
+  before_action :user_is_deleted?,only: [:show]
+  before_action :user_find,only: [:show,:edit,:update,:favorites,:suspend,:unsuspend,:destroy]
 
   def index
     @users=User.where(is_deleted:false)
@@ -26,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    favorites=Favorite.where(user_id:@user.id).pluck(:training_id)
+    favorites=Favorite.where(user_id:current_user.id).pluck(:training_id)
     @favorite_trainings=Training.find(favorites)
   end
 
@@ -40,6 +39,15 @@ class UsersController < ApplicationController
     @user.update(is_deleted:false)
     flash[:notice] ="利用停止を解除しました。"
     redirect_to users_path
+  end
+
+  def suspend_users
+    @users=User.where(is_deleted:true)
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to suspend_users_users_path
   end
 
   private
@@ -62,7 +70,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def user_deleted?
+  def user_is_deleted?
     user=User.find(params[:id])
     if current_user.admin==false && user.is_deleted==true
       flash[:notice]="このユーザーは利用停止されています"

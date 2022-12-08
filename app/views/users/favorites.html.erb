@@ -3,20 +3,25 @@
   <%= render 'users/setting',user:@user %>
 </div>
 <div class="col-md-8 offset-md-1">
-  <h4><%= @user.name %>さんのいいね一覧</h4>
+  <h4><%= @user.name %>さんのいいねした投稿一覧</h4>
   <table class="table">
     <thead>
       <tr>
         <th>ユーザー</th>
         <th>タイトル</th>
         <th>コメント数</th>
-        <th>いいね数</th>
+        <th>いいね</th>
       </tr>
     </thead>
     <tbody>
       <% @favorite_trainings.each do |training| %>
         <tr>
-          <td><%= image_tag training.user.get_profile_image,size:"50x50" %></td>
+          <td>
+            <%= link_to user_path(training.user.id) do %>
+              <%=image_tag training.user.get_profile_image,size:'50x50' %>
+              <%= training.user.name %>
+            <% end %>
+          </td>
           <td><%= link_to training.title,training_path(training) %></td>
           <td><%= training.comments.count %></td>
           <td id="favorite-btn<%= training.id %>">

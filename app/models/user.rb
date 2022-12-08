@@ -12,9 +12,9 @@ class User < ApplicationRecord
   has_many:groups,through: :group_users, dependent: :destroy
   has_many:group_chats, dependent: :destroy
 
-  has_many:user_rooms
-  has_many:rooms,through: :user_rooms
-  has_many:messages
+  has_many:user_rooms,dependent: :destroy
+  has_many:rooms,through: :user_rooms,dependent: :destroy
+  has_many:messages,dependent: :destroy
 
   has_many :relationships, class_name:"Relationship", foreign_key:"follower_id", dependent: :destroy
   # relationshipsでRelationテーブルを参照し、follower_idを基準にする
@@ -71,10 +71,6 @@ class User < ApplicationRecord
     else
       User.where("name LIKE?", "%"+content+"%")
     end
-  end
-
-  def active_for_authentication?
-    super && (is_deleted==false)
   end
 
 end

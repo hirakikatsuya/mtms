@@ -22,8 +22,8 @@
               <%= user.name %>
             <% end %>
           </td>
-          <td><%= user.followings.count %></td>
-          <td><%= user.followers.count %></td>
+          <td><%= user.followings.where(is_deleted:false).count %></td>
+          <td><%= user.followers.where(is_deleted:false).count %></td>
           <td>
             <% unless current_user == user %>
               <% if current_user.following?(user) %>

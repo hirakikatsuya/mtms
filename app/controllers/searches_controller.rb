@@ -5,9 +5,9 @@ class SearchesController < ApplicationController
     @content=params[:content]
     @method=params[:method]
     if @model == "user"
-      @records=User.search_for(@content, @method)
+      @records=User.search_for(@content, @method).where(is_deleted:false)
     else
-      @records=Training.search_for(@content, @method)
+      @records=Training.search_for(@content, @method).active_users
     end
   end
 

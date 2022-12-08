@@ -12,6 +12,8 @@ class Training < ApplicationRecord
   validates:training_day,presence:true
 
   has_one_attached :training_image
+  
+  scope :active_users,->{joins(:user).where(users:{is_deleted: false})}
 
   def favorited_by?(user)
     favorites.exists?(user_id:user.id)

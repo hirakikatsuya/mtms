@@ -1,29 +1,7 @@
 <div class="mx-auto col-sm-12 col-md-11 col-lg-8 px-5 px-sm-0">
-  <h1>フォロワー</h1>
+  <h1>フォロー</h1>
   <% if @users.exists? %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ユーザー</th>
-          <th>フォロー数</th>
-          <th>フォロワー数</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td>
-              <%= link_to user_path(user.id) do %>
-                <%=image_tag user.get_profile_image,size:'50x50' %>
-                <%= user.name %>
-              <% end %>
-            </td>
-            <td><%= user.followings.where(is_deleted:false).count %></td>
-            <td><%= user.followers.where(is_deleted:false).count %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <%= render "users/index",users:@users %>
   <% else %>
     <p>ユーザーはいません</p>
   <% end %>

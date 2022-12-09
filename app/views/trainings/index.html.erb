@@ -4,26 +4,11 @@
 </div>
 <div class="col-md-8 offset-md-1">
   <h4>投稿一覧</h4>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ユーザー</th>
-        <th>タイトル</th>
-        <th>コメント数</th>
-        <th>いいね数</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @trainings.each do |training| %>
-        <tr>
-          <td><%= image_tag training.user.get_profile_image,size:"50x50" %></td>
-          <td><%= link_to training.title,training_path(training) %></td>
-          <td><%= training.comments.count %></td>
-          <td id="favorite-btn<%= training.id %>">
-            <%= render 'favorites/favorite',training:training %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= form_tag trainings_path, method: :get do %>
+    <%= link_to "全てのトレーニング", trainings_path %>
+    <% @tags.each do |tag| %>
+          <%= link_to tag.tag, trainings_path(tag: tag.id) %>
+    <% end %>
+  <%= render "trainings/index",trainings:@trainings %>
+    <% end %>
 </div>

@@ -12,6 +12,15 @@
     <%= f.text_field:title,class:"form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label "タグ" %><br>
+    <%= f.collection_check_boxes(:tag_ids,Tag.all,:id,:tag) do |tag| %>
+        <%= tag.label do %>
+          <%= tag.check_box %>
+          <%= tag.text %>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
     <%= f.label "トレーニング内容" %><br>
     <%= f.text_area:body,class:"form-control",rows:"10" %>
   </div>

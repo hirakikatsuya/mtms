@@ -18,7 +18,8 @@ class TrainingsController < ApplicationController
   end
 
   def index
-    @trainings=Training.active_users
+    @tags=Tag.all
+    @trainings=params[:tag].present? ? Tag.find(params[:tag]).trainings.active_users : Training.active_users
   end
 
   def show
@@ -47,7 +48,7 @@ class TrainingsController < ApplicationController
   private
 
   def training_params
-    params.require(:training).permit(:title, :body, :training_day, :training_image)
+    params.require(:training).permit(:title, :body, :training_day, :training_image, tag_ids:[])
   end
 
   def is_matching_login_user

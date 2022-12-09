@@ -1,0 +1,33 @@
+<table class="table table-hover table-inverse">
+  <thead>
+    <tr>
+      <th>ユーザー</th>
+      <th>タイトル</th>
+      <th>タグ</th>
+      <th>コメント数</th>
+      <th>いいね数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% trainings.each do |training| %>
+    <tr>
+      <td>
+        <%= link_to user_path(training.user.id) do %>
+          <%= image_tag training.user.get_profile_image,size:"50x50" %>
+          <%= training.user.name %>
+        <% end %>
+      </td>
+      <td><%= link_to training.title,training_path(training.id) %></td>
+      <td>
+        <% training.tags.each do |tag| %>
+          <%= tag.tag %><br>
+        <% end %>
+      </td>
+      <td><%= training.comments.count %></td>
+      <td id="favorite-btn<%= training.id %>">
+        <%= render 'favorites/favorite',training:training %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table

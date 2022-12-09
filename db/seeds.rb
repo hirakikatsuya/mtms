@@ -11,3 +11,13 @@ User.create!(name:  ENV['NAME_KEY'],
              password_confirmation: ENV['PASS_KEY'],
              is_deleted: false,
              admin: true)
+
+Tag.create!([
+              {tag:'胸'},
+              {tag:'背中'},
+              {tag:'肩'},
+              {tag:'腕'},
+              {tag:'脚'},
+              {tag:'腹筋'},
+              {tag:'有酸素'}
+              ])

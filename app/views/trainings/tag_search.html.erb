@@ -1,0 +1,16 @@
+<div class="col-9">
+  <div class="d-flex">
+    <p style="font-size:35px"><%= @tag_search %>一覧</p>
+    <p style="font-size:25px; line-height: 2;">(全<%= @trainings.count %>件)</p>
+  </div>
+  <div class="d-flex flex-wrap items_width">
+    <% @trainings.each do |training| %>
+      <div class="mx-3 my-3">
+        <%= link_to training_path(training) do %>
+        <%= image_tag training.user.get_profile_image, size: "50x50" %>
+        <% end %><br>
+        <%= training.title %><br>
+      </div>
+    <% end %>
+  </div>
+</div>

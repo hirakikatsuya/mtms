@@ -20,6 +20,14 @@
       <td><%= @training.title %></td>
     </tr>
     <tr>
+      <th>タグ</th>
+      <td>
+        <% @training.tags.each do |tag| %>
+          <%= tag.tag %><br>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
       <th>トレーニング内容</th>
       <td><%= @training.body %></td>
     </tr>

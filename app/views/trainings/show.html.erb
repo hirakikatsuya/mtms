@@ -23,7 +23,7 @@
       <th>タグ</th>
       <td>
         <% @training.tags.each do |tag| %>
-          <%= tag.tag %><br>
+          <%= link_to tag.tag,trainings_path(tag: tag.id) %><br>
         <% end %>
       </td>
     </tr>

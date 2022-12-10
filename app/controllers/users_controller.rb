@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only:[:edit, :update]
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :ensure_guest_user, except:[:index, :show]
   before_action :admin_user,only: [:suspend,:unsuspend,:suspend_users,:destroy]
   before_action :user_is_deleted?,only: [:show]
   before_action :user_find,only: [:show,:edit,:update,:favorites,:suspend,:unsuspend,:destroy]
@@ -56,6 +56,12 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
+  def ensure_guest_user
+    if current_user.name == "guestuser"
+      redirect_to request.referer, notice: 'ゲストユーザーはこの機能を使用できません。'
+    end
+  end
+
   def is_matching_login_user
     user=User.find(params[:id])
     unless user == current_user
@@ -75,13 +81,6 @@ class UsersController < ApplicationController
     if current_user.admin==false && user.is_deleted==true
       flash[:notice]="このユーザーは利用停止されています"
       redirect_to users_path
-    end
-  end
-
-  def ensure_guest_user
-    user = User.find(params[:id])
-    if user.name == "guestuser"
-      redirect_to user_path(current_user) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
     end
   end
 

@@ -1,6 +1,7 @@
 class TrainingsController < ApplicationController
   before_action :is_matching_login_user, only:[:edit,:update,:destroy]
   before_action :training_find,only:[:show,:edit,:update,:destroy]
+  before_action :ensure_guest_user, except:[:index, :show]
 
   def new
     @training=Training.new
@@ -18,8 +19,12 @@ class TrainingsController < ApplicationController
   end
 
   def index
-    @tags=Tag.all
-    @trainings=params[:tag].present? ? Tag.find(params[:tag]).trainings.active_users : Training.active_users
+    if params[:tag].present?
+      @tag=Tag.find(params[:tag])
+      @trainings=Tag.find(params[:tag]).trainings.active_users
+    else
+      @trainings=Training.active_users
+    end
   end
 
   def show
@@ -61,6 +66,12 @@ class TrainingsController < ApplicationController
 
   def training_find
     @training=Training.find(params[:id])
+  end
+
+  def ensure_guest_user
+    if current_user.name == "guestuser"
+      redirect_to request.referer, notice: 'ゲストユーザーはこの機能を使用できません。'
+    end
   end
 
 end

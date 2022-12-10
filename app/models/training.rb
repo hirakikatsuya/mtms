@@ -10,9 +10,10 @@ class Training < ApplicationRecord
   validates:title, {presence:true,length:{maximum:50}}
   validates:body,presence:true
   validates:training_day,presence:true
+  validates:tags,presence: true
 
   has_one_attached :training_image
-  
+
   scope :active_users,->{joins(:user).where(users:{is_deleted: false})}
 
   def favorited_by?(user)

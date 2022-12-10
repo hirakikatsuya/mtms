@@ -3,12 +3,19 @@
   <%= render 'users/setting',user:current_user %>
 </div>
 <div class="col-md-8 offset-md-1">
-  <h4>投稿一覧</h4>
-  <%= form_tag trainings_path, method: :get do %>
-    <%= link_to "全てのトレーニング", trainings_path %>
-    <% @tags.each do |tag| %>
-          <%= link_to tag.tag, trainings_path(tag: tag.id) %>
-    <% end %>
-  <%= render "trainings/index",trainings:@trainings %>
-    <% end %>
+  <% if @tag!=nil %>
+    <h4><%= @tag.tag %>の投稿一覧</h4>
+  <% else %>
+    <h4>全ての投稿一覧</h4>
+  <% end %>
+    <%= form_tag trainings_path, method: :get do %>
+      <%= select_tag :tag,
+                     options_from_collection_for_select(Tag.all, :id, :tag, params[:tag]),
+                     {
+                       prompt: '絞り込み検索',
+                       onchange: 'submit(this.form);'
+                     }
+      %>
+    <%= render "trainings/index",trainings:@trainings %>
+  <% end %>
 </div>

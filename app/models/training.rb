@@ -9,7 +9,7 @@ class Training < ApplicationRecord
 
   validates:title, {presence:true,length:{maximum:50}}
   validates:body,presence:true
-  validates:training_day,presence:true
+  validates:start_time,presence:true
   validates:tags,presence: true
 
   has_one_attached :training_image

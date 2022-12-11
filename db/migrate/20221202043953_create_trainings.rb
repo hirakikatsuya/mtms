@@ -5,7 +5,7 @@ class CreateTrainings < ActiveRecord::Migration[6.1]
       t.references :user,null: false,foreign_key: true
       t.string :title,null: false
       t.text :body,null: false
-      t.date :training_day,null: false
+      t.datetime :start_time,null: false
 
       t.timestamps
     end

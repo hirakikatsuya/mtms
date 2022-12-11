@@ -32,7 +32,7 @@
 - コメント機能
 - フォロー機能
 - ページネーション機能(kaminari)
-- 検索機能（ransack）
+- 検索機能
 
 ## 設計書
 https://app.diagrams.net/#G19i1wNKOOjBHzGAQziNslS4K8XDMxztpD

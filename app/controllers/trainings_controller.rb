@@ -53,7 +53,7 @@ class TrainingsController < ApplicationController
   private
 
   def training_params
-    params.require(:training).permit(:title, :body, :training_day, :training_image, tag_ids:[])
+    params.require(:training).permit(:title, :body, :start_time, :training_image, tag_ids:[])
   end
 
   def is_matching_login_user

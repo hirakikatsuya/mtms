@@ -84,7 +84,7 @@ ja:
   errors:
     format: "%{attribute}%{message}"
     messages:
-      
+
       accepted: を受諾してください
       blank: を入力してください
       confirmation: と%{attribute}の入力が一致しません
@@ -181,3 +181,7 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+    ja:
+  simple_calendar:
+    previous: "<<"
+    next: ">>"

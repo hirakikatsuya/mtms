@@ -16,7 +16,4 @@
     <th>フォロワー</th>
     <th><%= link_to user.followers.where(is_deleted:false).count,user_followers_path(user) %></th>
   </tr>
-  <tr>
-    <td><%= link_to "new",new_training_path %></td>
-  </tr>
 </table>

@@ -17,5 +17,6 @@
                      }
       %>
     <%= render "trainings/index",trainings:@trainings %>
+    <%= paginate @trainings, theme: 'twitter-bootstrap-4' %>
   <% end %>
 </div>

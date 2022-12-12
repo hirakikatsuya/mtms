@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_action :user_find,only: [:show,:edit,:update,:favorites,:suspend,:unsuspend,:destroy]
 
   def index
-    @users=User.where(is_deleted:false)
+    @users=User.where(is_deleted:false).page(params[:page]).per(10)
   end
 
   def show
@@ -26,8 +26,9 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    favorites=Favorite.where(user_id:current_user.id).pluck(:training_id)
+    favorites=Favorite.where(user_id:@user.id).pluck(:training_id)
     @favorite_trainings=Training.find(favorites)
+    @favorite_trainings=Kaminari.paginate_array(@favorite_trainings).page(params[:page]).per(10)
   end
 
   def suspend

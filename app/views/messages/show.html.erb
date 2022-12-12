@@ -1,7 +1,7 @@
 <div class="col-7">
   <h2><%= @user.name %>さんとのメッセージ</h2>
   <div id="message_index">
-    <%= render "messages/message_index",messages:@messages %>
+    <%= render "messages/message_index",messages:@messages,user:@user %>
   </div>
   <div class="text-center">
     <%= render "messages/message_form",message:@message %>

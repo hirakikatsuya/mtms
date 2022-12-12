@@ -1,19 +1,20 @@
-<table class="table table-borderless">
-    <% @messages.each do |message| %>
-      <% if message.user == current_user %>
-        <tr>
-          <td></td>
-          <td style="width: fit-content;">
-            <p class="text-right text-dark border border-dark rounded-pill p-2"><%= message.message %></p>
-          </td>
-        </tr>
-      <% else %>
-        <tr>
-          <td>
-            <p class="text-left bg-primary text-white rounded-pill p-2"><%= message.message %></p>
-          </td>
-          <td></td>
-        </tr>
-      <% end %>
+<div id="messages">
+  <% @messages.each do |message|%>
+    <% if message.user_id==current_user.id%>
+      <div class="mycomment">
+        <p><%= message.message %></p>
+      </div>
+    <% else %>
+      <div class="fukidasi">
+        <div class="faceicon">
+          <%= image_tag user.get_profile_image %>
+        </div>
+        <div class="chatting">
+          <div class="says">
+            <p><%= message.message %></p>
+          </div>
+        </div>
+      </div>
     <% end %>
-</table>
+  <% end %>
+</div>

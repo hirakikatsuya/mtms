@@ -4,5 +4,6 @@
 </div>
 <div class="col-md-8 offset-md-1">
   <h2>ユーザー一覧</h2>
-    <%= render "users/index",users:@users %>
+  <%= render "users/index",users:@users %>
+  <%= paginate @users, theme: 'twitter-bootstrap-4' %>
 </div>

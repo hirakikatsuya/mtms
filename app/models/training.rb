@@ -30,13 +30,9 @@ class Training < ApplicationRecord
 
   def self.search_for(content, method)
     if method=="perfect"
-      Training.where(title:content)
-    elsif method=="forward"
-      Training.where("title LIKE?", content+"%")
-    elsif method=="backward"
-      Training.where("title LIKE?", "%"+content)
+      Training.where("title LIKE? OR body LIKE?", content,content)
     else
-      Training.where("title LIKE?", "%"+content+"%")
+      Training.where("title LIKE? OR body LIKE?", "%"+content+"%","%"+content+"%")
     end
   end
 

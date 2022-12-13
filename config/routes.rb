@@ -33,9 +33,11 @@ Rails.application.routes.draw do
   resources :messages,only:[:show,:create,:destroy]
 
   resources :groups do
-    get "join"=>"groups#join"
-    delete "leave"=>"groups#leave"
-    resources :group_chats,only:[:index,:create,:destroy]
+    member do
+      get "join"=>"groups#join"
+      delete "leave"=>"groups#leave"
+      resources :group_chats,only:[:index,:create,:destroy]
+    end
   end
 
 end

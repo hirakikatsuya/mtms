@@ -1,0 +1,37 @@
+<div class="col-md-3 text-center ">
+  <h2>グループ情報</h2>
+  <div class="mb-2">
+    <%= image_tag @group.get_group_image,size:"100x100",class:"rounded-circle" %>
+  </div>
+  <table class="table">
+    <tr>
+      <th>グループ名</th>
+      <td><%= @group.group_name %></td>
+    </tr>
+    <tr>
+      <th>グループ詳細</th>
+      <td><%= @group.group_explain %></td>
+    </tr>
+      <th>メンバー数</th>
+      <td><%= @group.users.count %></td>
+    </tr>
+  </table>
+  <div>
+    <% if @group.owner_id==current_user.id || current_user.admin==true %>
+      <%= link_to "編集する",edit_group_path(@group.id),class:"btn btn-success mb-2" %>
+      <%= link_to "削除する",group_path(@group.id),method: :delete,"data-confirm"=>"本当に削除しますか？",class:"btn btn-danger mb-2" %>
+    <% end %>
+    <% if @group.users.include?(current_user) || current_user.admin==true  %>
+      <%= link_to "グループチャットを始める",group_chats_path(@group.id),class:"btn btn-primary mb-2" %>
+    <% end %>
+    <% if @group.users.include?(current_user) %>
+      <%= link_to "グループから抜ける",leave_group_path(@group.id),method: :delete,class:"btn btn-warning" %>
+    <% else %>
+      <%= link_to "グループに参加する",join_group_path(@group.id),class:"btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+<div class="col-md-8 offset-md-1 text-center">
+  <h2>グループメンバー一覧</h2>
+  <%= render "users/index" ,users:@group.users %>
+</div>

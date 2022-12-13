@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>グループ</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% groups.each do |group| %>
+      <tr>
+        <td>
+          <%= link_to group_path(group.id) do %>
+            <%= image_tag group.get_group_image,size:"50x50" %>
+            <%= group.group_name %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table

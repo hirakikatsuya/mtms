@@ -2,13 +2,15 @@
   <div class="calendar-heading">
     <div class="row">
       <div class="col">
-        <h5>
+        <h4>
           <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
             <span class="calendar-title"><%= start_date.year %>年 <%= t('date.month_names')[start_date.month] %></span>
           <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
-        </h5>
+        </h4>
       </div>
-      <div class="col"><h5><%= link_to "新規投稿",new_training_path %></h5></div>
+      <div class="col text-right">
+        <h5><%= link_to "新規投稿",new_training_path %></h5>
+      </div>
     </div>
   </div>
   <table class="table table-bordered">

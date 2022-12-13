@@ -1,6 +1,8 @@
 <h3>"<%= @content %>"の検索結果</h3>
 <% if @model=='user' %>
   <%= render "users/index",users:@records %>
-<% else %>
+<% elsif @model=='training' %>
   <%= render "trainings/index",trainings:@records %>
+<% else %>
+  <%= render "groups/index",groups:@records %>
 <% end %>

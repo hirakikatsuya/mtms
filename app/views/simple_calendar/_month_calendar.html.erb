@@ -9,7 +9,9 @@
         </h4>
       </div>
       <div class="col text-right">
-        <h5><%= link_to "新規投稿",new_training_path %></h5>
+        <% if @user==current_user %>
+          <h5><%= link_to "新規投稿",new_training_path %></h5>
+        <% end %>
       </div>
     </div>
   </div>

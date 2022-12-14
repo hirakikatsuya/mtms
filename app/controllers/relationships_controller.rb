@@ -21,12 +21,4 @@ class RelationshipsController < ApplicationController
     @users=user.followers.where(is_deleted:false)
   end
 
-  private
-
-  def ensure_guest_user
-    if current_user.name == "guestuser"
-      redirect_to request.referer, notice: 'ゲストユーザーはこの機能を使用できません。'
-    end
-  end
-
 end

@@ -35,10 +35,4 @@ class MessagesController < ApplicationController
     params.require(:message).permit(:message, :room_id)
   end
 
-  def ensure_guest_user
-    if current_user.name == "guestuser"
-      redirect_to request.referer, notice: 'ゲストユーザーはこの機能を使用できません。'
-    end
-  end
-
 end

@@ -58,12 +58,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
-  def ensure_guest_user
-    if current_user.name == "guestuser"
-      redirect_to request.referer, notice: 'ゲストユーザーはこの機能を使用できません。'
-    end
-  end
-
   def is_matching_login_user
     user=User.find(params[:id])
     unless user == current_user

@@ -1,0 +1,9 @@
+<div class="col-7">
+  <h2><%= @group.group_name %>のグループチャット</h2>
+  <div id="message_index">
+    <%= render "group_chats/chat_index",group_chats:@group_chats %>
+  </div>
+  <div class="text-center">
+    <%= render "group_chats/chat_form",group_chat:@group_chat %>
+  </div>
+</div>

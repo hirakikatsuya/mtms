@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :users, only:[:index, :show, :edit, :update, :destroy] do
     resource :relationships, only:[:create, :destroy]
     member do
+      resource :messages,only:[:show,:create,:destroy]
       get "favorites"=>"users#favorites"
       patch "suspend"=>"users#suspend"
       patch "unsuspend"=>"users#unsuspend"
@@ -30,7 +31,7 @@ Rails.application.routes.draw do
     resources :comments, only:[:create,:destroy]
   end
 
-  resources :messages,only:[:show,:create,:destroy]
+
 
   resources :groups do
     member do

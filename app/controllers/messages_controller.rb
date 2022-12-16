@@ -21,8 +21,16 @@ class MessagesController < ApplicationController
 
   def create
     @message = current_user.messages.new(message_params)
-    @message.save
-    redirect_to request.referer
+    if @message.save
+      redirect_to request.referer
+    else
+      @user = User.find(params[:id])
+      rooms = current_user.user_rooms.pluck(:room_id)
+      user_rooms = UserRoom.find_by(user_id: @user.id, room_id: rooms)
+      @room = user_rooms.room
+      @messages = @room.messages
+      render :show
+    end
   end
 
   def destroy
@@ -32,7 +40,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :room_id)
+    params.require(:message).permit(:message,:message_image, :room_id)
   end
 
 end

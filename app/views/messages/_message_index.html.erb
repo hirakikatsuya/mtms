@@ -1,8 +1,11 @@
 <div id="messages">
-  <% @messages.each do |message|%>
+  <% messages.each do |message|%>
     <% if message.user_id==current_user.id%>
       <div class="mycomment">
-        <p><%= message.message %></p>
+        <p><%= message.message %></p><br>
+        <% if message.message_image.present? %>
+          <%= image_tag message.message_image,size:"200x200",class:"rounded-lg" %>
+        <% end %>
       </div>
     <% else %>
       <div class="fukidasi">
@@ -12,6 +15,9 @@
         <div class="chatting">
           <div class="says">
             <p><%= message.message %></p>
+            <% if message.message_image.present? %>
+              <%= image_tag message.message_image,size:"200x200",class:"rounded-lg" %>
+            <% end %>
           </div>
         </div>
       </div>

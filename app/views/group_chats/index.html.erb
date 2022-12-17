@@ -1,5 +1,6 @@
 <div class="col-7">
   <h2><%= @group.group_name %>のグループチャット</h2>
+  <%= render 'layouts/error',error:@group_chat %>
   <div id="message_index">
     <%= render "group_chats/chat_index",group_chats:@group_chats %>
   </div>

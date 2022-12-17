@@ -3,10 +3,10 @@
     <div class="container">
       <% if user_signed_in? %>
         <%= link_to "MTMS",user_path(current_user),class:"navbar-brand",style:"font-size:30px" %>
+        <%= render "layouts/search" %>
       <% else %>
         <%= link_to "MTMS",root_path,class:"navbar-brand",style:"font-size:30px" %>
       <% end %>
-      <%= render "layouts/search" %>
       <button class="navbar-toggler"
               type="button"
               data-toggle="collapse"

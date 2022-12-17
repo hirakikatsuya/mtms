@@ -27,25 +27,30 @@
   font-size: 20px;
   word-wrap: break-word;
 }
+
 .fukidasi {
   width: 100%;
   margin: 10px 0;
   overflow: hidden;
 }
+
 .fukidasi .faceicon {
   float: left;
   margin-right: -50px;
   width: 40px;
 }
+
 .fukidasi .faceicon img{
   width: 90%;
   height: auto;
   border-radius: 50%;
 }
+
 .fukidasi .chatting {
   width: 100%;
   text-align: left;
 }
+
 .says {
   display: inline-block;
   position: relative;
@@ -60,17 +65,27 @@
   margin: 0;
   padding: 0;
 }
+
+.says_image {
+  margin: 10px 0 0 50px;
+}
+
 .mycomment {
   margin: 10px 0;
 }
+
 .mycomment p {
   display: inline-block;
   position: relative;
-  margin: 0 10px 0 0;
+  margin: 0;
   padding: 8px;
   max-width: 250px;
   border-radius: 12px;
   background: #00BFFF;
   font-size: 20px;
   text-align: left;
+}
+
+.mycomment_image{
+  margin: 10px 0;
 }

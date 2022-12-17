@@ -1,4 +1,5 @@
 <%= form_with model: group_chat do |f| %>
   <%= f.text_field :chat %>
+  <%= f.file_field :chat_image %>
   <%= f.submit "送信する", class:"btn btn-sm btn-success chat-btn" %>
 <% end %>

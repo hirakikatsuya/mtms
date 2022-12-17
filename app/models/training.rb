@@ -22,7 +22,7 @@ class Training < ApplicationRecord
 
   def get_training_image
     unless training_image.attached?
-      file_path=Rails.root.join("app/assets/images/no_image.jpg")
+      file_path=Rails.root.join("app/assets/images/no_training_image.jpg")
       training_image.attach(io:File.open(file_path), filename:"default-image.jpg", content_type:"image/jpeg")
     end
     training_image.variant(resize_to_limit:[100, 100]).processed

@@ -1,18 +1,32 @@
 <div id="messages">
   <% group_chats.each do |chat| %>
     <% if chat.user_id==current_user.id %>
-      <div class="mycomment">
-        <p><%= chat.chat %></p>
-      </div>
+      <% if chat.chat.present? %>
+        <div class="mycomment">
+          <p><%= chat.chat %></p>
+        </div>
+      <% end %>
+      <% if chat.chat_image.present? %>
+        <div class="mycomment_image">
+          <%= image_tag chat.chat_image,size:"200x200",class:"rounded-lg" %>
+        </div>
+      <% end %>
     <% else %>
       <div class="fukidasi">
         <div class="faceicon">
           <%= image_tag chat.user.get_profile_image %>
         </div>
         <div class="chatting">
-          <div class="says">
-            <p><%= chat.chat %></p>
-          </div>
+          <% if chat.chat.present? %>
+            <div class="says">
+              <p><%= chat.chat %></p>
+            </div>
+          <% end %>
+          <% if chat.chat_image.present? %>
+            <div class="says_image">
+              <%= image_tag chat.chat_image,size:"200x200",class:"rounded-lg" %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

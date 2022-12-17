@@ -11,8 +11,12 @@ class GroupChatsController < ApplicationController
     @group=Group.find(params[:id])
     @group_chat=current_user.group_chats.new(group_chat_params)
     @group_chat.group_id=@group.id
-    @group_chat.save
-    redirect_to request.referer
+    if @group_chat.save
+      redirect_to request.referer
+    else
+      @group_chats=@group.group_chats
+      render :index
+    end
   end
 
   def destroy
@@ -22,7 +26,7 @@ class GroupChatsController < ApplicationController
   private
 
   def group_chat_params
-    params.require(:group_chat).permit(:chat)
+    params.require(:group_chat).permit(:chat,:chat_image)
   end
 
 end

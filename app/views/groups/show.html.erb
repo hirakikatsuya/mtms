@@ -13,7 +13,7 @@
       <td><%= @group.group_explain %></td>
     </tr>
       <th>メンバー数</th>
-      <td><%= @group.users.count %></td>
+      <td><%= @group.users.where(is_deleted:false).count %></td>
     </tr>
   </table>
   <div>
@@ -31,7 +31,8 @@
     <% end %>
   </div>
 </div>
-<div class="col-md-8 offset-md-1 text-center">
+<div class="col-md-8 offset-md-1">
   <h2>グループメンバー一覧</h2>
-  <%= render "users/index" ,users:@group.users %>
+  <%= render "users/index" ,users:@users %>
+  <%= paginate @users, theme: 'twitter-bootstrap-4' %>
 </div>

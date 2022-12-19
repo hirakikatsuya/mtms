@@ -89,3 +89,11 @@
 .mycomment_image{
   margin: 10px 0;
 }
+
+table th{
+  white-space: nowrap;
+}
+
+table td{
+  word-break: break-word;
+}

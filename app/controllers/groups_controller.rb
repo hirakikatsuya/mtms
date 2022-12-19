@@ -24,6 +24,7 @@ before_action :ensure_guest_user,except: [:show,:index]
   end
 
   def show
+    @users=@group.users.where(is_deleted:false).page(params[:page]).per(10)
   end
 
   def edit

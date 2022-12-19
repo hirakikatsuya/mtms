@@ -1,10 +1,10 @@
+<div class="text-wrap">
 <table class="table">
   <thead>
     <tr>
       <th>グループ</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>紹介文</th>
+      <th>ユーザー数</th>
       <th></th>
     </tr>
   </thead>
@@ -17,7 +17,21 @@
             <%= group.group_name %>
           <% end %>
         </td>
+        <td>
+          <%= group.group_explain %>
+        </td>
+        <td>
+          <%= group.users.where(is_deleted:false).count %>
+        </td>
+        <td>
+          <% if group.users.include?(current_user) %>
+            <%= link_to "グループから抜ける",leave_group_path(group.id),method: :delete,class:"btn btn-warning" %>
+          <% else %>
+            <%= link_to "グループに参加する",join_group_path(group.id),class:"btn btn-success" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
-</table
+</table>
+</div>

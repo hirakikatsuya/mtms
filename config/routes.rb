@@ -31,8 +31,6 @@ Rails.application.routes.draw do
     resources :comments, only:[:create,:destroy]
   end
 
-
-
   resources :groups do
     member do
       get "join"=>"groups#join"

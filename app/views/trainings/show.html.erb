@@ -4,7 +4,7 @@
 </div>
 <div class="col-md-8 offset-md-1">
   <h4>
-    <%= @training.user.name %>さんの<%= @training.start_time %>のトレーニング<br>
+    <%= @training.user.name %>さんの<%= l @training.start_time %>のトレーニング<br>
       <% if @training.user==current_user || current_user.admin==true %>
         <%= link_to "編集する",edit_training_path(@training.id),class:"btn btn-sm btn-success" %>
         <%= link_to "削除する",training_path(@training.id),method: :delete,"data-confirm"=>"本当に削除しますか？",class:"btn btn-sm btn-danger" %>

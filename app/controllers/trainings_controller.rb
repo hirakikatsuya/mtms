@@ -40,7 +40,7 @@ class TrainingsController < ApplicationController
       flash[:notice]="トレーニングを編集しました！"
       redirect_to user_path(current_user)
     else
-      render :edit_training_path
+      render :edit
     end
   end
 

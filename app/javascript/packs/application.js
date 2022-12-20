@@ -17,3 +17,12 @@ import '@fortawesome/fontawesome-free/js/all'
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+$(document).ready(function(){
+  const limit = document.querySelector(".trainingtitle a");
+  const str = limit.textContent;
+  const len = 5;
+  if (str.length > len) {
+    limit.textContent = str.substring(0, len) + "…";
+  }
+});

@@ -47,7 +47,8 @@ class TrainingsController < ApplicationController
   def destroy
     @training=Training.find(params[:id])
     @training.destroy
-    redirect_to trainings_path
+    flash[:notice]="トレーニングを削除しました"
+    redirect_to  user_path(current_user)
   end
 
   private

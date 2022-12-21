@@ -48,7 +48,6 @@
 .fukidasi .faceicon img{
   width: 90%;
   height: auto;
-  border-radius: 50%;
 }
 
 .fukidasi .chatting {
@@ -95,10 +94,15 @@
   margin: 10px 0;
 }
 
-table{
-  white-space: nowrap;
+table {
+  th{white-space: nowrap;}
+  td{word-break:break-word}
 }
 
 .btn{
   white-space: nowrap;
+}
+
+img{
+  border-radius: 50%;
 }

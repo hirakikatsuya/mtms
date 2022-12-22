@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
 
   def ensure_guest_user
     if current_user.name == "guestuser"
-      redirect_to user_path(current_user), notice: 'ゲストユーザーはこの機能を使用できません。'
+      flash[:notice]="ゲストユーザーはこの機能を使用できません。"
+      redirect_to request.referer
     end
   end
 

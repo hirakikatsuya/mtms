@@ -22,9 +22,9 @@
     <% end %>
     <div>
       <% if current_user.admin? && user!=current_user && user.is_deleted==false %>
-        <%= link_to "利用停止する",suspend_user_path,method: :patch,"data-confirm"=>"本当に利用停止しますか？",class:"btn btn-danger" %>
+        <%= link_to "利用停止する",suspend_user_path(user.id),method: :patch,"data-confirm"=>"本当に利用停止しますか？",class:"btn btn-danger" %>
       <% elsif current_user.admin? && user!=current_user && user.is_deleted==true %>
-        <%= link_to "利用停止を解除する",unsuspend_user_path,method: :patch,"data-confirm"=>"本当に利用停止を解除しますか？",class:"btn btn-success" %>
+        <%= link_to "利用停止を解除する",unsuspend_user_path(user.id),method: :patch,"data-confirm"=>"本当に利用停止を解除しますか？",class:"btn btn-success" %>
       <% end %>
     </div>
   </div>

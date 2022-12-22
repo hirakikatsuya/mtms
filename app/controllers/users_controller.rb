@@ -26,8 +26,7 @@ class UsersController < ApplicationController
   end
 
   def favorites
-    favorites=Favorite.where(user_id:@user.id).pluck(:training_id)
-    @favorite_trainings=Training.find(favorites)
+    @favorite_trainings=current_user.favorites.joins({:training => :user }).where(:users => {is_deleted: false})
     @favorite_trainings=Kaminari.paginate_array(@favorite_trainings).page(params[:page]).per(10)
   end
 

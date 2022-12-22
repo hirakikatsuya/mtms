@@ -4,6 +4,32 @@
 </div>
 <div class="col-md-8 offset-md-1">
   <h4><%= @user.name %>さんのいいねした投稿一覧</h4>
-  <%= render "trainings/index",trainings:@favorite_trainings %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ユーザー</th>
+        <th>タイトル</th>
+        <th>コメント数</th>
+        <th>いいね</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @favorite_trainings.each do |favorite| %>
+        <tr>
+          <td>
+            <%= link_to user_path(favorite.training.user.id) do %>
+              <%=image_tag favorite.training.user.get_profile_image,size:'50x50' %>
+              <%= favorite.training.user.name %>
+            <% end %>
+          </td>
+          <td><%= link_to favorite.training.title,training_path(favorite.training) %></td>
+          <td><%= favorite.training.comments.count %></td>
+          <td id="favorite-btn<%= favorite.training.id %>">
+            <%= render 'favorites/favorite',training:favorite.training %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <%= paginate @favorite_trainings, theme: 'twitter-bootstrap-4' %>
 </div>

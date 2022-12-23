@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   before_action :ensure_guest_user
 
@@ -38,9 +40,7 @@ class MessagesController < ApplicationController
   end
 
   private
-
-  def message_params
-    params.require(:message).permit(:message,:message_image, :room_id)
-  end
-
+    def message_params
+      params.require(:message).permit(:message, :message_image, :room_id)
+    end
 end

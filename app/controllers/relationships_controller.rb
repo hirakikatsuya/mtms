@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RelationshipsController < ApplicationController
   before_action :ensure_guest_user
 
@@ -12,13 +14,12 @@ class RelationshipsController < ApplicationController
   end
 
   def followings
-    user=User.find(params[:user_id])
-    @users=user.followings.where(is_deleted:false)
+    user = User.find(params[:user_id])
+    @users = user.followings.where(is_deleted: false)
   end
 
   def followers
-    user=User.find(params[:user_id])
-    @users=user.followers.where(is_deleted:false)
+    user = User.find(params[:user_id])
+    @users = user.followers.where(is_deleted: false)
   end
-
 end

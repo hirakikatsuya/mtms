@@ -6,3 +6,4 @@
 <% else %>
   <%= render "groups/index",groups:@records %>
 <% end %>
+<%= paginate @records, theme: 'twitter-bootstrap-4' %>

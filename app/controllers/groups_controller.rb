@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 class GroupsController < ApplicationController
-before_action :group_find,only: [:show,:edit,:update,:destroy,:join,:leave]
-before_action :owner_user,only: [:edit,:destroy]
-before_action :ensure_guest_user,except: [:show,:index]
+  before_action :group_find, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_action :owner_user, only: [:edit, :destroy]
+  before_action :ensure_guest_user, except: [:show, :index]
 
   def new
-    @group=Group.new
+    @group = Group.new
   end
 
   def create
-    @group=Group.new(group_params)
-    @group.owner_id=current_user.id
+    @group = Group.new(group_params)
+    @group.owner_id = current_user.id
     if @group.save
       @group.users << current_user
-      flash[:notice]="グループを作成しました！"
+      flash[:notice] = "グループを作成しました！"
       redirect_to group_path(@group.id)
     else
       render :new
@@ -20,11 +22,11 @@ before_action :ensure_guest_user,except: [:show,:index]
   end
 
   def index
-    @groups=Group.page(params[:page]).per(10)
+    @groups = Group.page(params[:page]).per(10)
   end
 
   def show
-    @users=@group.users.where(is_deleted:false).page(params[:page]).per(10)
+    @users = @group.users.where(is_deleted: false).page(params[:page]).per(10)
   end
 
   def edit
@@ -32,7 +34,7 @@ before_action :ensure_guest_user,except: [:show,:index]
 
   def update
     if @group.update(group_params)
-      flash[:notice]="グループ情報を更新しました！"
+      flash[:notice] = "グループ情報を更新しました！"
       redirect_to group_path(@group.id)
     else
       render :edit
@@ -55,21 +57,19 @@ before_action :ensure_guest_user,except: [:show,:index]
   end
 
   private
-
-  def group_params
-    params.require(:group).permit(:group_name, :group_explain, :group_image)
-  end
-
-  def group_find
-    @group=Group.find(params[:id])
-  end
-
-  def owner_user
-    @group = Group.find(params[:id])
-    unless @group.owner_id == current_user.id || current_user.admin
-      flash[:notice]="この機能は利用できません。"
-      redirect_to groups_path
+    def group_params
+      params.require(:group).permit(:group_name, :group_explain, :group_image)
     end
-  end
 
+    def group_find
+      @group = Group.find(params[:id])
+    end
+
+    def owner_user
+      @group = Group.find(params[:id])
+      unless @group.owner_id == current_user.id || current_user.admin
+        flash[:notice] = "この機能は利用できません。"
+        redirect_to groups_path
+      end
+    end
 end

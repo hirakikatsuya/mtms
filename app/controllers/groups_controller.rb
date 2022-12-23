@@ -48,11 +48,13 @@ class GroupsController < ApplicationController
 
   def join
     @group.users << current_user
+    flash[:notice] = "グループに参加しました！"
     redirect_to group_path(@group.id)
   end
 
   def leave
     @group.users.delete(current_user)
+    flash[:notice] = "グループを抜けました"
     redirect_to groups_path
   end
 

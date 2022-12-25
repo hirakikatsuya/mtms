@@ -33,7 +33,9 @@
 - フォロー機能
 - ページネーション機能(kaminari)
 - 検索機能
-
+- DM機能（相互フォロー)
+- グループ機能
+- 管理者機能
 ## 設計書
 https://app.diagrams.net/#G19i1wNKOOjBHzGAQziNslS4K8XDMxztpD
 
@@ -47,4 +49,3 @@ https://app.diagrams.net/#G19i1wNKOOjBHzGAQziNslS4K8XDMxztpD
 
 ## 使用素材
 https://www.silhouette-illust.com/
-- 使用素材検討中

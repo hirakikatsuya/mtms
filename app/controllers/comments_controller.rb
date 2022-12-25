@@ -5,8 +5,7 @@ class CommentsController < ApplicationController
 
   def create
     @training = Training.find(params[:training_id])
-    @comment = Comment.new(comment_params)
-    @comment.user_id = current_user.id
+    @comment = current_user.comments.new(comment_params)
     @comment.training_id = @training.id
     @comment.save
   end

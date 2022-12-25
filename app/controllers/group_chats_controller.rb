@@ -14,10 +14,13 @@ class GroupChatsController < ApplicationController
     @group_chat = current_user.group_chats.new(group_chat_params)
     @group_chat.group_id = @group.id
     if @group_chat.save
-      redirect_to request.referer
+          @group = Group.find(params[:id])
+    @group_chats = @group.group_chats
+      @group_chat = current_user.group_chats.new(group_chat_params)
     else
-      @group_chats = @group.group_chats
-      render :index
+          @group = Group.find(params[:id])
+    @group_chats = @group.group_chats
+      @group_chat = current_user.group_chats.new(group_chat_params)
     end
   end
 

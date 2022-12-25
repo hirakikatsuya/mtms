@@ -23,20 +23,16 @@ class MessagesController < ApplicationController
 
   def create
     @message = current_user.messages.new(message_params)
+    @user = User.find(params[:id])
+    rooms = current_user.user_rooms.pluck(:room_id)
+    user_rooms = UserRoom.find_by(user_id: @user.id, room_id: rooms)
+    @room = user_rooms.room
+    @messages = @room.messages
     if @message.save
-      redirect_to request.referer
+      @message = current_user.messages.new(message_params)
     else
-      @user = User.find(params[:id])
-      rooms = current_user.user_rooms.pluck(:room_id)
-      user_rooms = UserRoom.find_by(user_id: @user.id, room_id: rooms)
-      @room = user_rooms.room
-      @messages = @room.messages
-      render :show
+      @message = current_user.messages.new(message_params)
     end
-  end
-
-  def destroy
-    current_user.messages.find(params[:id]).destroy
   end
 
   private

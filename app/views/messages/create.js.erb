@@ -1,2 +1,3 @@
-$('#message_index').html('<%= j( render "messages/message_index",message:@message) %>');
-$("textarea").val('');
+$('#message_index').html('<%= j( render "messages/message_index",messages:@messages,user:@user) %>');
+$("#message_message").val('');
+$("#message_message_image").val('');

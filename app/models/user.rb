@@ -62,11 +62,7 @@ class User < ApplicationRecord
     end
   end
 
-  def self.search_for(content, method)
-    if method == "perfect"
-      User.where(name: content)
-    else
+  def self.search_for(content)
       User.where("name LIKE?", "%" + content + "%")
-    end
   end
 end

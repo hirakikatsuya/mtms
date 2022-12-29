@@ -18,11 +18,7 @@ class Group < ApplicationRecord
     group_image.variant(resize_to_limit: [100, 100]).processed
   end
 
-  def self.search_for(content, method)
-    if method == "perfect"
-      Group.where(group_name: content)
-    else
+  def self.search_for(content)
       Group.where("group_name LIKE?", "%" + content + "%")
-    end
   end
 end

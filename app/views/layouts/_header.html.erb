@@ -3,7 +3,6 @@
     <div class="container">
       <% if user_signed_in? %>
         <%= link_to "MTMS",user_path(current_user),class:"navbar-brand",style:"font-size:30px" %>
-        <%= render "layouts/search" %>
       <% else %>
         <%= link_to "MTMS",root_path,class:"navbar-brand",style:"font-size:30px" %>
       <% end %>
@@ -19,6 +18,9 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= render "layouts/search" %>
+            </li>
             <% if current_user.admin %>
               <li class="nav-item">
                 <%= link_to "利用停止ユーザー一覧", suspend_users_users_path,class:"nav-link text-light" %>

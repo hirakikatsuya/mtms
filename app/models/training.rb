@@ -29,11 +29,7 @@ class Training < ApplicationRecord
     training_image.variant(resize_to_limit: [100, 100]).processed
   end
 
-  def self.search_for(content, method)
-    if method == "perfect"
-      Training.where("title LIKE? OR body LIKE?", content, content)
-    else
+  def self.search_for(content)
       Training.where("title LIKE? OR body LIKE?", "%" + content + "%", "%" + content + "%")
-    end
   end
 end

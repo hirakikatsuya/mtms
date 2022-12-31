@@ -17,22 +17,10 @@
             <%= user.name %>
           <% end %>
         </td>
-        <td><%= user.followings.where(is_deleted:false).count %></td>
-        <td><%= user.followers.where(is_deleted:false).count %></td>
-        <td>
-          <% unless current_user == user || user.name =="guestuser" %>
-            <% if current_user.following?(user) %>
-              <%= link_to "フォロー外す",user_relationships_path(user.id),method: :delete,class:"btn btn-secondary" %>
-            <% else %>
-              <%= link_to "フォローする",user_relationships_path(user.id),method: :post,class:"btn btn-info" %>
-            <% end %>
-          <% end %>
-        </td>
-        <td>
-        <% if current_user!=user&&current_user.following?(user)&&user.following?(current_user) %>
-          <%= link_to "メッセージを始める",messages_path(user.id),class:"btn btn-primary mb-2" %>
-        <% end %>
-        </td>
+        <td id="following_count<%= user.id %>"><%= render "relationships/following_count",user:user %></td>
+        <td id="follower_count<%= user.id %>"><%= render "relationships/follower_count",user:user %></td>
+        <td id="follow_btn<%= user.id %>"><%= render "relationships/follow_btn",user:user %></td>
+        <td id="message_btn<%= user.id %>"><%= render "messages/message_btn",user:user %></td>
       </tr>
     <% end %>
   </tbody>

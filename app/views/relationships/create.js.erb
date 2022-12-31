@@ -1,0 +1,6 @@
+$("#follow_btn<%= @user.id %>").html('<%= j(render "relationships/follow_btn",user:@user) %>');
+$("#message_btn<%= @user.id %>").html('<%= j(render "messages/message_btn",user:@user) %>');
+$("#info_following_count<%= current_user.id %>").html('<%= j(render "relationships/following_count",user:current_user) %>');
+$("#info_follower_count<%= @user.id %>").html('<%= j(render "relationships/follower_count",user:@user) %>');
+$("#following_count<%= current_user.id %>").html('<%= j(render "relationships/following_count",user:current_user) %>');
+$("#follower_count<%= @user.id %>").html('<%= j(render "relationships/follower_count",user:@user) %>');

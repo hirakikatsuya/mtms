@@ -4,15 +4,13 @@ class RelationshipsController < ApplicationController
   before_action :ensure_guest_user
 
   def create
+    @user=User.find(params[:user_id])
     current_user.follow(params[:user_id])
-    flash[:notice] = "フォローしました！"
-    redirect_to request.referer
   end
 
   def destroy
+    @user=User.find(params[:user_id])
     current_user.unfollow(params[:user_id])
-    flash[:notice] = "フォローを解除しました"
-    redirect_to request.referer
   end
 
   def followings

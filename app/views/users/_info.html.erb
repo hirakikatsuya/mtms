@@ -9,11 +9,12 @@
     <th>自己紹介</th>
     <td><%= user.introduction %></td>
   </tr>
+  <tr>
     <th>フォロー</th>
-    <th><%= link_to user.followings.where(is_deleted:false).count,user_followings_path(user) %></th>
+    <th id="info_following_count<%= user.id %>"><%= render "relationships/following_count",user:user %></td>
   </tr>
   <tr>
     <th>フォロワー</th>
-    <th><%= link_to user.followers.where(is_deleted:false).count,user_followers_path(user) %></th>
+    <th id="info_follower_count<%= user.id %>"><%= render "relationships/follower_count",user:user %></th>
   </tr>
 </table>

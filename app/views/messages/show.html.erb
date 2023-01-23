@@ -1,6 +1,6 @@
 <div class="col-md-8 col-sm-12">
   <h2><%= @user.name %>さんとのメッセージ</h2>
-  <div id="message_index">
+  <div id="message_index<%= @message.id %>">
     <%= render "messages/message_index",messages:@messages,user:@user %>
   </div>
   <div id="message_form">

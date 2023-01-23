@@ -1,5 +1,5 @@
 <div class="mx-auto col-sm-12 col-md-11 col-lg-8 px-5 px-sm-0">
-  <h1>フォロワー</h1>
+  <h1><%= @user.name %>さんのフォロワー一覧</h1>
   <% if @users.exists? %>
     <%= render "users/index",users:@users %>
   <% else %>

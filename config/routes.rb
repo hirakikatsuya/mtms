@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     resource :relationships, only: [:create, :destroy]
     member do
-      resource :messages, only: [:show, :create, :destroy]
+      resource :messages, only: [:show, :create, :destroy] do
+        namespace :api do
+          resources :messages, only: :show, defaults: { format: 'json' }
+        end
+      end
       get "favorites" => "users#favorites"
       patch "suspend" => "users#suspend"
       patch "unsuspend" => "users#unsuspend"

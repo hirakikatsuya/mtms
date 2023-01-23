@@ -4,6 +4,7 @@
         <tr>
           <th>ユーザー</th>
           <th>コメント</th>
+          <th>投稿日</th>
           <th></th>
         </tr>
       </thead>
@@ -17,8 +18,9 @@
               <% end %>
             </td>
             <td><%= safe_join(comment.comment.split("\n"),tag(:br)) %></td>
+            <td><%= l comment.created_at, format: :long %></td>
             <% if comment.user==current_user || current_user.admin==true %>
-              <td><%= link_to "削除",training_comment_path(comment.training,comment),method: :delete,class:"btn btn-sm btn-danger",remote:true %></td>
+              <td><%= link_to "削除",training_comment_path(comment.training,comment),method: :delete,"data-confirm"=>"本当に削除しますか？",class:"btn btn-sm btn-danger",remote:true %></td>
             <% end %>
           </tr>
         <% end %>

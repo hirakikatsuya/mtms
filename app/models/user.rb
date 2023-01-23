@@ -65,4 +65,5 @@ class User < ApplicationRecord
   def self.search_for(content)
       User.where("name LIKE?", "%" + content + "%")
   end
+
 end

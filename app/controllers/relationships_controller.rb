@@ -2,6 +2,7 @@
 
 class RelationshipsController < ApplicationController
   before_action :ensure_guest_user
+  before_action :user_is_deleted?
 
   def create
     @user=User.find(params[:user_id])
@@ -22,4 +23,15 @@ class RelationshipsController < ApplicationController
     @user = User.find(params[:user_id])
     @users = @user.followers.where(is_deleted: false)
   end
+
+  private
+
+  def user_is_deleted?
+    user = User.find(params[:user_id])
+    if current_user.admin == false && user.is_deleted == true
+      flash[:notice] = "このユーザーは利用停止されています"
+      redirect_to users_path
+    end
+  end
+
 end

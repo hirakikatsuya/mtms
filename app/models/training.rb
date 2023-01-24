@@ -8,10 +8,10 @@ class Training < ApplicationRecord
   has_many :training_tags, dependent: :destroy
   has_many :tags, through: :training_tags
 
-  validates :title, { presence: true, length: { maximum: 50 } }
-  validates :body, presence: true
   validates :start_time, presence: true
+  validates :title, { presence: true, length: { maximum: 50 } }
   validates :tags, presence: true
+  validates :body, presence: true, length: { maximum: 300 }
 
   has_one_attached :training_image
 

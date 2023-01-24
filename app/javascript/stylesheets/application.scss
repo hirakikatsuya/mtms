@@ -2,6 +2,7 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
 .simple-calendar {
+
  .td{
   white-space: nowrap;
   overflow: hidden;
@@ -105,4 +106,20 @@ table {
 
 img{
   border-radius: 50%;
+}
+
+.training-image{
+    width: 50%;
+		object-fit: cover;
+		border-radius: 10%;
+
+}
+
+.message-image {
+  	width: 30%;
+		object-fit: cover;
+}
+
+.message-time{
+  font-size:10%;
 }

@@ -1,5 +1,17 @@
 ja:
   activerecord:
+    attributes:
+      user:
+        name: ユーザーネーム
+        introduction: 紹介文
+      training:
+        title: タイトル
+        body: トレーニング内容
+        start_time: トレーニング日
+        tags: タグ
+      group:
+        group_name: グループ名
+        group_explain: グループ詳細
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -84,7 +96,6 @@ ja:
   errors:
     format: "%{attribute}%{message}"
     messages:
-
       accepted: を受諾してください
       blank: を入力してください
       confirmation: と%{attribute}の入力が一致しません

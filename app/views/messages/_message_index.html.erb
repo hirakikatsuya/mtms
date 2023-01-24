@@ -3,12 +3,14 @@
     <% if message.user_id==current_user.id %>
       <% if message.message.present? %>
         <div class="mycomment">
+          <span class="message-time"><%= l chat.created_at,format: :long %></span>
           <p><%= message.message %></p>
         </div>
       <% end %>
       <% if message.message_image.present? %>
         <div class="mycomment_image">
-          <%= image_tag message.message_image,size:"200x200",class:"rounded-lg" %>
+          <span class="message-time"><%= l chat.created_at,format: :long %></span>
+          <%= image_tag message.message_image,class:"message-image rounded-lg" %>
         </div>
       <% end %>
     <% else %>
@@ -20,11 +22,13 @@
           <% if message.message.present? %>
             <div class="says">
               <p><%= message.message %></p>
-            </div><br>
+            </div>
+            <span class="message-time"><%= l chat.created_at,format: :long %></span><br>
           <% end %>
           <% if message.message_image.present? %>
             <div class="says_image">
-              <%= image_tag message.message_image,size:"200x200",class:"rounded-lg" %>
+              <%= image_tag message.message_image,class:"message-image rounded-lg" %>
+              <span class="message-time"><%= l chat.created_at,format: :long %></span>
             </div>
           <% end %>
         </div>

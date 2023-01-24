@@ -4,6 +4,6 @@
   <% end %>
 <% else %>
   <%= link_to training_favorites_path(training),method: :post,class:"text-primary",remote:true do %>
-    ♥<%= training.favorites.count %>
+    ♡<%= training.favorites.count %>
   <% end %>
 <% end %>

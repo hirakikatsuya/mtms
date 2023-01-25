@@ -23,9 +23,9 @@ class TrainingsController < ApplicationController
   def index
     if params[:tag].present?
       @tag = Tag.find(params[:tag])
-      @trainings = Tag.find(params[:tag]).trainings.active_users.page(params[:page]).per(10)
+      @trainings = Tag.find(params[:tag]).trainings.active_users.order(created_at: :desc).page(params[:page]).per(10)
     else
-      @trainings = Training.active_users.page(params[:page]).per(10)
+      @trainings = Training.all.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
 
